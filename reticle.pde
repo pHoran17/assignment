@@ -1,12 +1,12 @@
 class reticle extends dispObject
 {
   //Move reticle with mouse or arrow keys
-  float cenX,cenY,x1,x2,x3,x4,y1,y2,y3,y4;
+  float cenX,cenY;
   float rad;
   PVector position = new PVector(x,y);
   color col;
   
-  reticle(float cenX, float cenY, float rad,PVector position,color col)// float x1,float x2,float x3,float x4,float y1,float y2,float y3,float y4,
+  reticle(float cenX, float cenY, float rad,PVector position,color col)
   {
     this.cenX = cenX;
     this.cenY= cenY;
@@ -18,13 +18,10 @@ class reticle extends dispObject
   void render()
   {
     pushMatrix();
-    translate(position.x,position.y);
+    //translate(position.x,position.y);
     stroke(col);
     noFill();
     ellipse(cenX,cenY,rad*2,rad*2);
-    /*line(x1,y1,x2,y2);
-    line(x3,y3,x4,y4);
-    */
     popMatrix();
   }
   
@@ -32,8 +29,8 @@ class reticle extends dispObject
   {
     cenX = mouseX;
     cenY = mouseY;
-    position.x = cenX/10;
-    position.y = cenY/10;
+    //position.x = cenX;
+    //position.y = cenY;
     mousePressed();
     mouseReleased();
     checkCollisions();
@@ -46,7 +43,7 @@ class reticle extends dispObject
       //dispObject dis = dispObjects.get(i);
       if(tar instanceof target)
       {
-        if(dist(this.position.y, this.position.y, tar.position.x, tar.position.y) < 5)
+        if(dist(this.cenX, this.cenY, tar.position.x, tar.position.y) < this.rad)
         {
           dispObjects.remove(tar);
         }

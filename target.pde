@@ -17,7 +17,7 @@ class target extends dispObject
     this.x4 = x1 + 10 ;
     this.y4 = y1 + 10;
   }
-  //draw shape, render/spawn in and float forward in random direction. Set up hit detection with reticle
+  //Set up hit detection with reticle. Unable to due to being unable to read data from position vector specifically y axis
   void render()
   {
     pushMatrix();
@@ -35,5 +35,25 @@ class target extends dispObject
   {
     position.x += random(1,3);
     position.y += random(1,3);
+    checkEdges();
   }
+  void checkEdges()
+  //Method used to check if any target objects touch the edge of the screen, if they do they should be destroyed. Will not work due to being unable to read position.y values properly
+  {
+    for (int i= dispObjects.size() - 1; i >= 0; i--)//Cant remove objects if iterating forwards, iterate backwards to remove objects
+    {
+      dispObject tar = dispObjects.get(i);
+      if(tar instanceof target)
+      {
+        if(tar.position.x < 0 || tar.position.x > width)
+        {
+          dispObjects.remove(tar);
+        }
+        if(tar.position.y < 0 || tar.position.y >= 400)
+        {
+          dispObjects.remove(tar);
+        }
+      }
+    }
+   }
 }

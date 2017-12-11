@@ -27,7 +27,9 @@ class radar extends dispObject
   void render()
   {
     pushMatrix();
-    stroke(0, 255, 0);
+    fill(0,255,0);
+    rect(cenX-45,cenY-45,90,90);
+    stroke(0, 0, 255);
     noFill();
     ellipse(cenX, cenY, rad * 2, rad * 2);
     int trailLength = 10;

@@ -1,16 +1,15 @@
 import ddf.minim.*;
-//Fix reticle so it renders once
 void setup()
 {
   size(800,600);
   frameRate(60);
   noCursor();
-  minim = new Minim(this);
-  mouse= new PVector(10, 10);
+  minim = new Minim(this);//Minim used for sounds to ensure correct audio playback
+  mouse= new PVector(0, 0);
   //tar = new PVector(10,20);
   dispObjects.add(new display(375,415,100,60));
   dispObjects.add(new radar(450,260,40,0.5,color(0,0,200)));
-  dispObjects.add(new reticle(width/2,height/2,15,mouse,color(255,255,255)));
+  dispObjects.add(new reticle(width/2,height/2,15,mouse,color(0,0,150)));
   quotes.add("Bootup complete");
   quotes.add("I see em' up ahead. Lets rock and roll!");
   quotes.add("Slippy can be such a headache!");
@@ -65,37 +64,37 @@ void draw()
   rect(200,401,450,100);
   if(frameCount % 120 == 0)
   {
-    if(random(0,1) > 0.5)
+    if(random(0,1) > 0.5)//Adds randomly placed target to dispObjects arraylist
     {
-      dispObject p = new target(10,10,color(200,200,200),random(0, 300), random(0, 200));
+      dispObject p = new target(50,30,color(200,200,200),random(0, 300), random(0, 200));
       dispObjects.add(p);
     }
   }
-  for(j=dispObjects.size()-1; j >=0 ;j--)
+  for(j=dispObjects.size()-1; j >=0 ;j--)//for loop used to decrement through arraylist of objects and render and update each of them.
     {
       dispObject d = dispObjects.get(j);
       d.render();
       d.update();
     }
   
-  image(images.get(i), 380, 420,91,50);
-  textSize(16);
+  image(images.get(i), 380, 420,91,50);//Displays relevant image from images arraylist
+  textSize(18);
+  textAlign(CENTER);
   fill(255,255,255);
-  text(quotes.get(i),350,520);
+  text(quotes.get(i),400,530);//Displays relevant quote from quotes arraylist
   
 
 }
 void keyPressed()
 {
-  //Get image to match up with right sound
   if(keyCode == 32)//Space bar changes picture + plays sound
   {
     int rand = (int)random(1,4);
-    switch(rand)
+    switch(rand)//Randomly chooses a teammate and plays a voice clip
     {
       case 1:
       {
-        //String s = "I see em' up ahead. Lets rock and roll!";
+        //String s = "I see em' up ahead. Lets rock and roll!"; Created ArrayList for quotes for easier implementation
         sounds.get(1).rewind();
         sounds.get(1).play();
         i=1;
@@ -136,7 +135,7 @@ void keyPressed()
     }
     
   }
-  /*
+  /* redundant due to use of mouse, caused NullPointerExceptions
     if(key == 'w')//W moves reticle up
     {
       ret.cenY -= 10;
@@ -154,10 +153,29 @@ void keyPressed()
       ret.cenX += 10;
     }
     */
-    
-    
   }
-  
-
-//Keypressed and Key released will be included here
-//Implement reticle when completed
+  void mousePressed()
+  {
+    for (int i= dispObjects.size() - 1; i >= 0; i--)//Cant remove objects if iterating forwards, iterate backwards to remove objects
+    {
+      dispObject ret = dispObjects.get(i);
+      //dispObject dis = dispObjects.get(i);
+      if(ret instanceof reticle)
+      {
+        ret.col = color(255,0,0);
+      }
+    }
+    //col = color(255,0,0);
+  }
+  void mouseReleased()
+  {
+      for (int i= dispObjects.size() - 1; i >= 0; i--)//Cant remove objects if iterating forwards, iterate backwards to remove objects
+    {
+      dispObject ret = dispObjects.get(i);
+      //dispObject dis = dispObjects.get(i);
+      if(ret instanceof reticle)
+      {
+        ret.col = color(255,255,255);
+      }
+    }
+  }
