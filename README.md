@@ -9,5 +9,5 @@ This program is a User Interface for an Arwing fighter spacecraft from the Starf
 
 ### Embed
 <a href="https://www.youtube.com/watch?v=2L_b4Dh7jbQ
-" target="_blank"><img src="http://img.youtube.com/vi/v=2L_b4Dh7jbQ/0.jpg" 
+" target="_blank"><img src="http://img.youtube.com/vi/2L_b4Dh7jbQ/0.jpg" 
 alt="Assignment1" width="240" height="180" border="10" /></a>
