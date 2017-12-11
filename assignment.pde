@@ -3,7 +3,6 @@ import ddf.minim.*;
 void setup()
 {
   size(800,600);
-  background(0,0,0);
   frameRate(60);
   noCursor();
   minim = new Minim(this);
@@ -51,6 +50,7 @@ int j;
 
 void draw()
 {
+  background(0,0,0);
   stroke(220,220,220);
   fill(200,200,200);
   //triangle(200,400,425,300,650,400);
@@ -68,16 +68,24 @@ void draw()
     }
   }
   for(j=dispObjects.size()-1; j >=0 ;j--)
-  {
-    dispObject d = dispObjects.get(j);
-    d.render();
-    d.update();
-  }
+    {
+      dispObject d = dispObjects.get(j);
+      d.render();
+      d.update();
+    }
+  
   image(images.get(i), 380, 420,91,50);
   
 
 }
-
+void mousePressed()
+{
+  dispObjects.get(2).col = color(255,0,0);
+}
+void mouseReleased()
+{
+  dispObjects.get(2).col = color(255,255,255);
+}
 void keyPressed()
 {
   //Get image to match up with right sound

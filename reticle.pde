@@ -19,20 +19,20 @@ class reticle extends dispObject
   {
     pushMatrix();
     translate(position.x,position.y);
-    stroke(255,255,255);
+    stroke(col);
     noFill();
     ellipse(cenX,cenY,rad*2,rad*2);
     /*line(x1,y1,x2,y2);
     line(x3,y3,x4,y4);
     */
     popMatrix();
-    
-    
   }
+  
   void update()
   {
     cenX = mouseX;
     cenY = mouseY;
+    //checkCollisions();
     if(mousePressed)
     {
       stroke(255,0,0);
@@ -42,19 +42,18 @@ class reticle extends dispObject
   {
     for (int i= dispObjects.size() - 1; i >= 0; i--)//Cant remove objects if iterating forwards, iterate backwards to remove objects
     {
-      dispObject go = gameObjects.get(i);
+      dispObject go = dispObjects.get(i);
       if(go instanceof target)
       {
-        if(dist(this.pos.x, this.pos.y, go.pos.x, go.pos.y) < 40)
+        if(dist(this.position.x, this.position.y, go.position.x, go.position.y) < 15)
         {
-          ((Powerup) go).applyTo(this);
-          gameObjects.remove(go);
+          dispObjects.remove(go);
         }
       }
     }
-  }
-  */
-  /*void keyPressed()
+  }*/
+  
+  /*void keyPressed() redundant, will be using mouse control instead
   {
     if(key == 'w')//W moves reticle up
     {

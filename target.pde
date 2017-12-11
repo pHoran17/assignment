@@ -30,6 +30,7 @@ class target extends dispObject
   }
   void update()
   {
-  
+    position.x += 10;
+    position.y += 5;
   }
 }
