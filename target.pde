@@ -20,17 +20,20 @@ class target extends dispObject
   //draw shape, render/spawn in and float forward in random direction. Set up hit detection with reticle
   void render()
   {
+    pushMatrix();
     fill(0,0,200);
+    translate(position.x,position.y);
     quad(x1,y1,x2,y2,x3,y3,x4,y4);
     line(x1+3,y1+5,x1+15,y1-3);
     line(x1+15,y1-3,x1+8,y1+9);
     line(x2+4,y2+1,x2,y2+9);
     line(x2,y2+9,x2+10,y2+4);
+    popMatrix();
     
   }
   void update()
   {
-    position.x += 10;
-    position.y += 5;
+    position.x += random(1,3);
+    position.y += random(1,3);
   }
 }

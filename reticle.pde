@@ -32,26 +32,38 @@ class reticle extends dispObject
   {
     cenX = mouseX;
     cenY = mouseY;
-    //checkCollisions();
-    if(mousePressed)
-    {
-      stroke(255,0,0);
-    }
+    position.x = cenX/10;
+    position.y = cenY/10;
+    mousePressed();
+    mouseReleased();
+    checkCollisions();
   }
-  /*void checkCollisions()
+  void checkCollisions()
   {
     for (int i= dispObjects.size() - 1; i >= 0; i--)//Cant remove objects if iterating forwards, iterate backwards to remove objects
     {
-      dispObject go = dispObjects.get(i);
-      if(go instanceof target)
+      dispObject tar = dispObjects.get(i);
+      //dispObject dis = dispObjects.get(i);
+      if(tar instanceof target)
       {
-        if(dist(this.position.x, this.position.y, go.position.x, go.position.y) < 15)
+        if(dist(this.position.y, this.position.y, tar.position.x, tar.position.y) < 5)
         {
-          dispObjects.remove(go);
+          dispObjects.remove(tar);
         }
       }
+      /*if(tar instanceof target && dis instanceof display)
+      {
+        if(dist(tar.position.x,tar.position.y, dis.x + 100,dis.y + 60) <= 200)
+        {
+          println(dist(tar.position.x,tar.position.y, dis.x + 100,dis.y + 60));
+          dispObjects.remove(tar);
+        }
+      }
+      */
+        
+      }
     }
-  }*/
+  
   
   /*void keyPressed() redundant, will be using mouse control instead
   {
@@ -75,10 +87,10 @@ class reticle extends dispObject
   */
   void mousePressed()
   {
-      stroke(255,0,0);
+      col = color(255,0,0);
   }
   void mouseReleased()
   {
-      stroke(255,255,255);
+      col = color(255,255,255);
   }
 }
